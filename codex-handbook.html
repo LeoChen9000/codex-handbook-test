@@ -1,0 +1,1652 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex 实用手册 — 从零到精通</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #232733;
+  --border: #2e3345;
+  --accent: #6c8aff;
+  --accent2: #4ecdc4;
+  --accent3: #ff6b6b;
+  --text: #e4e6f0;
+  --text2: #9a9db8;
+  --code-bg: #141620;
+  --success: #51cf66;
+  --warning: #ffd43b;
+  --info: #74c0fc;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+h1 {
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+.subtitle {
+  color: var(--text2);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+h2 {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+h3 {
+  font-size: 1.25rem;
+  color: var(--accent2);
+  margin: 1.8rem 0 0.8rem;
+}
+h4 {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 1.2rem 0 0.5rem;
+}
+p { margin-bottom: 1rem; }
+ul, ol {
+  margin: 0.5rem 0 1rem 1.5rem;
+  color: var(--text2);
+}
+li { margin-bottom: 0.4rem; }
+code {
+  background: var(--code-bg);
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  font-family: "Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 0.9em;
+  color: var(--accent2);
+}
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: var(--text);
+}
+.note {
+  background: rgba(108, 138, 255, 0.08);
+  border-left: 4px solid var(--accent);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.warning {
+  background: rgba(255, 212, 59, 0.08);
+  border-left-color: var(--warning);
+}
+.success {
+  background: rgba(81, 207, 102, 0.08);
+  border-left-color: var(--success);
+}
+.info {
+  background: rgba(116, 192, 252, 0.08);
+  border-left-color: var(--info);
+}
+.tip {
+  background: rgba(78, 205, 196, 0.08);
+  border-left-color: var(--accent2);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+th, td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+th {
+  background: var(--surface2);
+  color: var(--accent);
+  font-weight: 600;
+}
+td { color: var(--text2); }
+.badge {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.badge-beginner { background: rgba(81, 207, 102, 0.2); color: var(--success); }
+.badge-intermediate { background: rgba(116, 192, 252, 0.2); color: var(--info); }
+.badge-advanced { background: rgba(255, 107, 107, 0.2); color: var(--accent3); }
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0 2rem;
+}
+.toc h3 {
+  color: var(--accent);
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+.toc ul {
+  list-style: none;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 2rem;
+}
+.toc a {
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.toc a:hover { color: var(--accent); }
+.step {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+@media (max-width: 640px) {
+  .container { padding: 1rem; }
+  h1 { font-size: 1.8rem; }
+  .toc ul { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Codex 实用手册</h1>
+<p class="subtitle">从零到精通 —— OpenAI 编程智能体完整指南（2025-2026）</p>
+
+<!-- ==================== 目录 ==================== -->
+<nav class="toc">
+  <h3>📑 目录</h3>
+  <ul>
+    <li><a href="#part1">第一部分：认识 Codex</a></li>
+    <li><a href="#part2">第二部分：安装与配置</a></li>
+    <li><a href="#part3">第三部分：基础使用入门</a></li>
+    <li><a href="#part4">第四部分：命令行界面详解</a></li>
+    <li><a href="#part5">第五部分：桌面应用使用指南</a></li>
+    <li><a href="#part6">第六部分：Skills 技能系统</a></li>
+    <li><a href="#part7">第七部分：Plugins 插件系统</a></li>
+    <li><a href="#part8">第八部分：MCP 集成</a></li>
+    <li><a href="#part9">第九部分：Prompt 编写技巧</a></li>
+    <li><a href="#part10">第十部分：高级工作流</a></li>
+    <li><a href="#part11">第十一部分：多代理协作</a></li>
+    <li><a href="#part12">第十二部分：自动化与定时任务</a></li>
+    <li><a href="#part13">第十三部分：调试与故障排查</a></li>
+    <li><a href="#part14">第十四部分：安全与最佳实践</a></li>
+    <li><a href="#part15">第十五部分：常见问题 FAQ</a></li>`r`n  <li><a href="#part16">第十六部分：10个手把手实战案例</a></li>
+  </ul>
+</nav>
+
+<!-- ==================== 第一部分 ==================== -->
+<h2 id="part1">第一部分：认识 Codex <span class="badge badge-beginner">入门</span></h2>
+
+<h3>1.1 什么是 Codex？</h3>
+<p>Codex 是 OpenAI 推出的<strong>编程智能体（Coding Agent）</strong>，专为软件开发而设计。它能够：</p>
+<ul>
+  <li><strong>编写代码</strong> — 根据自然语言描述生成完整功能</li>
+  <li><strong>理解代码</strong> — 阅读和分析整个代码库</li>
+  <li><strong>调试修复</strong> — 定位并修复 bug</li>
+  <li><strong>重构优化</strong> — 改善代码质量和架构</li>
+  <li><strong>运行测试</strong> — 执行测试并分析结果</li>
+  <li><strong>多代理协作</strong> — 并行派遣多个子代理处理不同任务</li>
+</ul>
+
+<div class="note">
+  <strong>💡 核心概念：</strong>Codex 不是简单的代码补全工具。它是一个<strong>自主代理</strong>，可以在你的工作区中执行命令、读写文件、搜索代码、运行测试，像一个真正的结对程序员一样与你协作。
+</div>
+
+<h3>1.2 Codex 的使用场景</h3>
+<table>
+  <tr><th>场景</th><th>说明</th></tr>
+  <tr><td>新项目脚手架</td><td>输入需求，自动生成项目结构和样板代码</td></tr>
+  <tr><td>Bug 修复</td><td>描述错误现象，Codex 定位问题并修复</td></tr>
+  <tr><td>功能开发</td><td>从需求到实现，一步到位</td></tr>
+  <tr><td>代码审查</td><td>让 Codex 审查代码质量、安全性、性能</td></tr>
+  <tr><td>文档生成</td><td>自动为代码库生成文档</td></tr>
+  <tr><td>学习探索</td><td>快速理解陌生代码库的结构和逻辑</td></tr>
+</table>
+
+<h3>1.3 Codex 的三个使用面</h3>
+<ul>
+  <li><strong>Codex CLI</strong> — 终端命令行界面，适合服务器环境和自动化流程</li>
+  <li><strong>Codex Desktop App</strong> — 桌面应用程序，带图形界面，适合日常开发</li>
+  <li><strong>Codex API</strong> — 编程接口，可嵌入你自己的应用中</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 第二部分 ==================== -->
+<h2 id="part2">第二部分：安装与配置 <span class="badge badge-beginner">入门</span></h2>
+
+<h3>2.1 前置条件</h3>
+<ol>
+  <li><strong>OpenAI API 密钥</strong> — 在 <code>platform.openai.com</code> 获取</li>
+  <li><strong>Node.js 18+</strong> — Codex 基于 Node.js 运行</li>
+  <li><strong>Git</strong> — 版本控制支持</li>
+</ol>
+
+<h3>2.2 安装 Codex CLI</h3>
+<pre><code class="language-bash"># 通过 npm 全局安装 Codex CLI
+npm install -g @openai/codex
+
+# 验证安装
+codex --version</code></pre>
+
+<h3>2.3 安装 Codex 桌面应用</h3>
+<p>前往 <code>codex.ai</code> 下载对应操作系统的安装包（Windows / macOS / Linux），安装后启动即可。</p>
+
+<h3>2.4 配置 API 密钥</h3>
+<pre><code class="language-bash"># 方法一：交互式设置
+codex config
+
+# 方法二：直接设置环境变量
+# Windows PowerShell
+ = "[你的密钥]"
+
+# Linux / macOS
+export OPENAI_API_KEY="[你的密钥]"</code></pre>
+
+<h3>2.5 配置文件位置</h3>
+<table>
+  <tr><th>平台</th><th>配置目录</th><th>说明</th></tr>
+  <tr><td>Windows</td><td><code>%USERPROFILE%\.codex</code></td><td>用户级配置</td></tr>
+  <tr><td>macOS / Linux</td><td><code>~/.codex</code></td><td>用户级配置</td></tr>
+</table>
+
+<div class="tip">
+  <strong>🔧 配置提示：</strong>Codex 的核心配置文件是 <code>config.json</code>，位于 <code>.codex</code> 目录下。你可以在此修改 API 端点、默认模型、区域设置等。
+</div>
+
+<hr>
+
+<!-- ==================== 第三部分 ==================== -->
+<h2 id="part3">第三部分：基础使用入门 <span class="badge badge-beginner">入门</span></h2>
+
+<h3>3.1 第一次对话</h3>
+<p>打开 Codex 后，直接在输入框或终端中输入你的需求即可。例如：</p>
+
+<pre><code># 创建一个 Express.js 项目
+帮我创建一个 Express.js 项目，包含用户注册、登录、JWT 认证中间件
+
+# 修复一个 bug
+这个函数在处理空数组时会崩溃，帮我修复：
+function sum(arr) {
+  return arr.reduce((a, b) => a + b);
+}</code></pre>
+
+<h3>3.2 基本交互流程</h3>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>描述问题</strong> — 用自然语言清楚描述你想做什么</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>Codex 分析</strong> — Codex 会先浏览相关代码文件，理解上下文</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>制定计划</strong> — Codex 会生成一个执行计划，显示它将分几步完成</div>
+</div>
+<div class="step">
+  <div class="step-num">4</div>
+  <div><strong>执行操作</strong> — Codex 开始读写文件、运行命令、执行测试</div>
+</div>
+<div class="step">
+  <div class="step-num">5</div>
+  <div><strong>结果反馈</strong> — Codex 完成后汇报做了什么，你审阅并给出反馈</div>
+</div>
+
+<h3>3.3 高效提问的技巧</h3>
+<table>
+  <tr><th>❌ 低效提问</th><th>✅ 高效提问</th></tr>
+  <tr><td>"帮我写个程序"</td><td>"帮我写一个 Python 脚本，遍历当前目录统计所有 .py 文件的行数"</td></tr>
+  <tr><td>"有 bug"</td><td>"运行 <code>npm test</code> 时第三个测试失败，错误信息是 TypeError: undefined is not a function"</td></tr>
+  <tr><td>"优化代码"</td><td>"把 <code>src/auth.js</code> 中的同步文件读取改为异步，提升性能"</td></tr>
+</table>
+
+<div class="note success">
+  <strong>✅ 黄金法则：</strong>描述越具体，Codex 的输出越精准。尽量提供：文件路径、错误信息、期望行为、技术栈偏好。
+</div>
+
+<hr>
+
+<!-- ==================== 第四部分 ==================== -->
+<h2 id="part4">第四部分：命令行界面详解 <span class="badge badge-intermediate">进阶</span></h2>
+
+<h3>4.1 常用命令速查</h3>
+<pre><code># 启动 Codex 交互模式
+codex
+
+# 单次命令模式（非交互）
+codex -p "帮我列出当前目录所有 TypeScript 文件"
+
+# 指定模型
+codex --model gpt-5.4
+
+# 设置 token 预算
+codex --token-budget 100000
+
+# 查看帮助
+codex --help</code></pre>
+
+<h3>4.2 沙箱与安全模式</h3>
+<p>Codex 默认在沙箱环境中运行，限制其对文件系统的访问范围。你可以配置权限级别：</p>
+
+<table>
+  <tr><th>模式</th><th>说明</th><th>适用场景</th></tr>
+  <tr><td><code>workspace-write</code></td><td>仅允许读写工作区内的文件</td><td>日常开发（推荐）</td></tr>
+  <tr><td><code>approve-each</code></td><td>每个命令需人工确认</td><td>高安全要求环境</td></tr>
+  <tr><td><code>full</code></td><td>完全访问权限</td><td>需要系统级操作的场景</td></tr>
+</table>
+
+<h3>4.3 工作区管理</h3>
+<pre><code># 初始化工作区
+cd /path/to/your/project
+codex init
+
+# 添加文件到上下文
+codex add src/**/*.ts
+
+# 忽略某些文件
+# 在 .codex/.gitignore 中添加排除规则</code></pre>
+
+<h3>4.4 会话管理</h3>
+<pre><code># 列出所有会话
+codex sessions list
+
+# 恢复上次会话
+codex sessions restore
+
+# 归档旧会话
+codex sessions archive</code></pre>
+
+<hr>
+
+<!-- ==================== 第五部分 ==================== -->
+<h2 id="part5">第五部分：桌面应用使用指南 <span class="badge badge-beginner">入门</span></h2>
+
+<h3>5.1 界面概览</h3>
+<p>Codex 桌面应用包含以下主要区域：</p>
+<ul>
+  <li><strong>左侧边栏</strong> — 会话列表、线程管理、历史记录</li>
+  <li><strong>中央面板</strong> — 聊天交互区，输入需求、查看 Codex 回复</li>
+  <li><strong>右侧面板</strong> — 文件浏览器、代码预览、终端输出</li>
+  <li><strong>底部状态栏</strong> — Token 用量、模型信息、连接状态</li>
+</ul>
+
+<h3>5.2 创建新线程</h3>
+<p>每个线程代表一个独立的任务上下文。建议：</p>
+<ul>
+  <li>每个功能开发创建一个新线程</li>
+  <li>Bug 修复和特性开发分开线程</li>
+  <li>复杂任务可以<strong>分叉线程</strong>进行并行探索</li>
+</ul>
+
+<h3>5.3 线程操作</h3>
+<ul>
+  <li><strong>重命名</strong> — 右键点击线程，选择"重命名"，便于后续查找</li>
+  <li><strong>固定</strong> — 将重要线程置顶，方便快速访问</li>
+  <li><strong>分叉</strong> — 基于现有线程创建分支，保留历史上下文</li>
+  <li><strong>归档</strong> — 完成的任务归档到历史，保持侧边栏整洁</li>
+</ul>
+
+<h3>5.4 文件操作</h3>
+<p>Codex 桌面应用可以直接：</p>
+<ul>
+  <li>在工作区中<strong>创建、编辑、删除</strong>文件</li>
+  <li>通过 <code>apply_patch</code> 精确修改代码片段</li>
+  <li>在右侧面板实时预览文件内容</li>
+  <li>查看 Git 差异对比</li>
+</ul>
+
+<div class="note info">
+  <strong>📌 提示：</strong>Codex 使用 <code>apply_patch</code> 而非全文替换的方式修改文件，这种方式更安全、更精确，且能保留 Git 的变更追踪。
+</div>
+
+<hr>
+
+<!-- ==================== 第六部分 ==================== -->
+<h2 id="part6">第六部分：Skills 技能系统 <span class="badge badge-intermediate">进阶</span></h2>
+
+<h3>6.1 什么是 Skills？</h3>
+<p>Skill（技能）是 Codex 的可扩展能力模块。每个 Skill 由一个 <code>SKILL.md</code> 文件定义，告诉 Codex 在特定场景下应该如何行动。就像给 Codex 安装"专业证书"。</p>
+
+<h3>6.2 内置 Skills</h3>
+<table>
+  <tr><th>Skill</th><th>用途</th></tr>
+  <tr><td><code>imagegen</code></td><td>图像生成与编辑，支持 AI 创建位图视觉素材</td></tr>
+  <tr><td><code>openai-docs</code></td><td>查询 OpenAI 官方文档，获取最新 API 和模型信息</td></tr>
+  <tr><td><code>plugin-creator</code></td><td>创建和编排 Codex 插件目录结构</td></tr>
+  <tr><td><code>skill-creator</code></td><td>指导如何创建新的 Skill</td></tr>
+  <tr><td><code>skill-installer</code></td><td>从社区仓库安装第三方 Skill</td></tr>
+  <tr><td><code>find-skills</code></td><td>发现和推荐合适的 Skill 供安装</td></tr>
+</table>
+
+<h3>6.3 安装 Skill</h3>
+<pre><code># 安装社区 Skill
+npx skills add vercel-labs/skills@find-skills -g -y
+
+# 从 GitHub 仓库安装
+npx skills add github-user/repo@skill-name -g -y
+
+# 安装后重启 Codex 生效</code></pre>
+
+<h3>6.4 自定义 Skill</h3>
+<p>你可以为自己的项目创建专属 Skill。在 <code>.codex/skills/</code> 目录下创建：</p>
+<pre><code>.codex/skills/
+└── my-project/
+    ├── SKILL.md          # 技能定义文件
+    └── references/       # 参考资料目录
+        ├── api-guide.md
+        └── conventions.md</code></pre>
+
+<p><code>SKILL.md</code> 的基本格式：</p>
+<pre><code>---
+name: "my-skill"
+description: "当用户需要...时使用此技能"
+---
+
+# 我的技能名称
+
+## 触发条件
+当用户提到 XXX 时，使用此技能。
+
+## 执行步骤
+1. 第一步做什么
+2. 第二步做什么
+3. ...
+
+## 注意事项
+- 注意事项 1
+- 注意事项 2</code></pre>
+
+<div class="tip">
+  <strong>💡 最佳实践：</strong>Skill 的 <code>description</code> 字段决定了 Codex 何时自动调用它。写得越准确，Codex 识别得越及时。
+</div>
+
+<hr>
+
+<!-- ==================== 第七部分 ==================== -->
+<h2 id="part7">第七部分：Plugins 插件系统 <span class="badge badge-advanced">高阶</span></h2>
+
+<h3>7.1 什么是 Plugins？</h3>
+<p>Plugins（插件）扩展了 Codex 的能力边界，让它能够连接到外部服务和工具。每个插件可以包含多个 Skills。</p>
+
+<h3>7.2 常见插件类型</h3>
+<table>
+  <tr><th>插件</th><th>功能</th></tr>
+  <tr><td>Airtable</td><td>读写 Airtable 数据库表格</td></tr>
+  <tr><td>Atlassian</td><td>与 Jira、Confluence 集成</td></tr>
+  <tr><td>Base44</td><td>应用部署与管理</td></tr>
+</table>
+
+<h3>7.3 安装插件</h3>
+<pre><code># 安装插件（通过 Codex 应用界面）
+# 1. 打开 Codex 设置
+# 2. 进入插件管理页面
+# 3. 搜索并安装所需插件
+
+# 或通过命令行
+codex plugin install airtable
+codex plugin install atlassian</code></pre>
+
+<h3>7.4 插件目录结构</h3>
+<pre><code>plugins/
+└── airtable/
+    ├── .app.json            # 应用配置
+    ├── .codex-plugin/
+    │   └── plugin.json      # 插件元数据
+    └── skills/
+        └── airtable-cli/
+            └── SKILL.md     # 技能定义</code></pre>
+
+<hr>
+
+<!-- ==================== 第八部分 ==================== -->
+<h2 id="part8">第八部分：MCP 集成 <span class="badge badge-advanced">高阶</span></h2>
+
+<h3>8.1 什么是 MCP？</h3>
+<p>MCP（Model Context Protocol）是 OpenAI 定义的标准化协议，用于让 Codex 与外部工具和服务通信。通过 MCP，Codex 可以：</p>
+<ul>
+  <li>访问远程 API 和数据源</li>
+  <li>调用外部服务（如数据库、搜索引擎）</li>
+  <li>集成第三方工具链</li>
+</ul>
+
+<h3>8.2 配置 MCP 服务器</h3>
+<pre><code># 添加 OpenAI 开发者文档 MCP 服务器
+codex mcp add openaiDeveloperDocs --url https://developers.openai.com/mcp
+
+# 添加自定义 MCP 服务器
+codex mcp add myServer --url http://localhost:3000/mcp</code></pre>
+
+<h3>8.3 查看可用 MCP 资源</h3>
+<pre><code># 列出所有 MCP 资源
+codex mcp list-resources
+
+# 列出资源模板
+codex mcp list-templates</code></pre>
+
+<hr>
+
+<!-- ==================== 第九部分 ==================== -->
+<h2 id="part9">第九部分：Prompt 编写技巧 <span class="badge badge-intermediate">进阶</span></h2>
+
+<h3>9.1 Prompt 分层结构</h3>
+<p>高效的 Codex 使用涉及三个层次的指令：</p>
+
+<table>
+  <tr><th>层级</th><th>文件</th><th>作用域</th><th>优先级</th></tr>
+  <tr><td>最高层</td><td>用户直接输入</td><td>当前对话</td><td>最高</td></tr>
+  <tr><td>中间层</td><td><code>AGENTS.md</code></td><td>所在目录及子目录</td><td>中高</td></tr>
+  <tr><td>底层</td><td><code>SKILL.md</code></td><td>全局</td><td>中</td></tr>
+</table>
+
+<h3>9.2 AGENTS.md 使用指南</h3>
+<p>在项目根目录创建 <code>AGENTS.md</code> 文件，为 Codex 提供项目级别的定制指令：</p>
+
+<pre><code># AGENTS.md
+
+## 编码规范
+- 使用 TypeScript 严格模式
+- 文件名使用 camelCase
+- 组件使用函数式写法
+
+## 技术栈偏好
+- 前端：React 18 + TypeScript
+- 后端：Node.js + Express
+- 数据库：PostgreSQL
+
+## 特殊说明
+- 不要修改 <code>src/config/</code> 下的文件
+- 测试文件放在 <code>tests/</code> 目录下</code></pre>
+
+<div class="note">
+  <strong>⚠️ 注意：</strong><code>AGENTS.md</code> 的作用域是其所在目录及其所有子目录。更深层级的 <code>AGENTS.md</code> 优先于外层文件。
+</div>
+
+<h3>9.3 高效 Prompt 模板</h3>
+
+<h4>模板一：新功能开发</h4>
+<pre><code>请在 <code>src/</code> 目录下实现 [功能名称]。
+
+要求：
+1. 使用 [技术栈]
+2. 遵循项目的 [编码规范]
+3. 编写对应的单元测试
+4. 更新 README 中的相关说明
+
+参考文件：[列出已有类似功能的文件路径]</code></pre>
+
+<h4>模板二：Bug 修复</h4>
+<pre><code>发现一个 Bug：
+- 文件：<code>src/auth/login.ts</code>
+- 第 [XX] 行
+- 错误信息：<code>[粘贴错误]</code>
+- 复现步骤：
+  1. [步骤一]
+  2. [步骤二]
+
+预期行为：[描述应该发生什么]
+实际行为：[描述实际发生了什么]</code></pre>
+
+<h4>模板三：代码审查</h4>
+<pre><code>请审查 <code>src/payment/</code> 目录下的代码，重点关注：
+1. 安全性问题（SQL 注入、XSS 等）
+2. 性能瓶颈
+3. 代码重复
+4. 缺少错误处理的地方
+
+输出格式：按文件列出发现的问题和建议</code></pre>
+
+<h4>模板四：重构优化</h4>
+<pre><code>请将 <code>src/utils/helpers.js</code> 重构为 TypeScript。
+
+要求：
+- 添加类型定义
+- 提取公共逻辑到独立模块
+- 保持现有 API 不变
+- 更新所有引用该文件的导入路径</code></pre>
+
+<hr>
+
+<!-- ==================== 第十部分 ==================== -->
+<h2 id="part10">第十部分：高级工作流 <span class="badge badge-advanced">高阶</span></h2>
+
+<h3>10.1 迭代式开发</h3>
+<p>Codex 支持渐进式开发，你可以分步引导：</p>
+
+<pre><code># 第一轮：搭建骨架
+帮我创建一个 RESTful API 的项目结构，包含 controllers、models、routes 目录
+
+# 第二轮：逐个实现
+现在实现 userController，包含 CRUD 操作
+
+# 第三轮：添加验证
+给 userController 添加输入验证，使用 Joi
+
+# 第四轮：编写测试
+为 userController 编写单元测试，覆盖率至少 80%</code></pre>
+
+<h3>10.2 代码库探索</h3>
+<p>面对陌生代码库时，让 Codex 帮你快速上手：</p>
+
+<pre><code># 生成代码库概览
+请浏览整个项目，输出：
+1. 项目结构树
+2. 主要技术栈
+3. 入口文件和路由映射
+4. 数据模型关系
+
+# 定位特定功能
+找到项目中处理支付回调的所有文件，画出调用链路</code></pre>
+
+<h3>10.3 批量操作</h3>
+<p>Codex 可以同时处理多个文件：</p>
+
+<pre><code># 批量重命名
+将所有文件中的 <code>getUserData</code> 重命名为 <code>fetchUserProfile</code>，
+包括函数定义、调用处和测试文件
+
+# 批量迁移
+将整个项目从 JavaScript 迁移到 TypeScript，
+保持现有功能不变</code></pre>
+
+<h3>10.4 自动化测试生成</h3>
+<pre><code># 为现有代码生成测试
+请为 <code>src/services/emailService.ts</code> 生成单元测试，
+覆盖以下场景：
+- 正常发送邮件
+- 邮件模板渲染失败
+- SMTP 连接超时
+- 附件上传失败
+
+使用 Jest 框架，测试文件放在 <code>tests/services/</code> 目录下</code></pre>
+
+<h3>10.5 文档驱动开发</h3>
+<pre><code># 从文档生成代码
+根据以下 API 文档生成实现代码：
+[粘贴 OpenAPI/Swagger 规范]
+
+# 从代码生成文档
+请为 <code>src/controllers/</code> 下的所有控制器生成 JSDoc 注释，
+并为整个项目生成一份 API 文档（Markdown 格式）</code></pre>
+
+<hr>
+
+<!-- ==================== 第十一部分 ==================== -->
+<h2 id="part11">第十一部分：多代理协作 <span class="badge badge-advanced">高阶</span></h2>
+
+<h3>11.1 什么是多代理？</h3>
+<p>Codex 可以<span class="badge badge-advanced">派遣子代理（Sub-Agents）</span>并行处理多个子任务。这就像组建一个虚拟开发团队，每个成员负责不同的模块。</p>
+
+<h3>11.2 适用场景</h3>
+<ul>
+  <li><strong>大型重构</strong> — 不同模块由不同代理并行处理</li>
+  <li><strong>多文件修改</strong> — 各代理负责不同文件的更新</li>
+  <li><strong>并行探索</strong> — 同时研究多种技术方案</li>
+</ul>
+
+<h3>11.3 使用方式</h3>
+<pre><code># 在对话中描述需要并行处理的任务
+请同时完成以下工作：
+1. 为用户模块编写单元测试
+2. 为订单模块编写集成测试
+3. 为支付模块编写 E2E 测试
+
+这三个任务互不影响，可以并行执行。</code></pre>
+
+<h3>11.4 代理类型</h3>
+<table>
+  <tr><th>类型</th><th>用途</th><th>特点</th></tr>
+  <tr><td>默认代理</td><td>通用任务</td><td>继承父代理模型和能力</td></tr>
+  <tr><td>Explorer 代理</td><td>代码库探索</td><td>快速、权威，擅长回答特定问题</td></tr>
+  <tr><td>Worker 代理</td><td>代码修改执行</td><td>负责具体的编码和修改工作</td></tr>
+</table>
+
+<div class="warning note">
+  <strong>⚠️ 注意事项：</strong>并行代理会增加 token 消耗。对于简单任务，直接让主代理处理更高效。多代理适合<strong>大规模、独立性强的子任务</strong>。
+</div>
+
+<hr>
+
+<!-- ==================== 第十二部分 ==================== -->
+<h2 id="part12">第十二部分：自动化与定时任务 <span class="badge badge-advanced">高阶</span></h2>
+
+<h3>12.1 自动化类型</h3>
+<p>Codex 支持多种自动化场景：</p>
+<table>
+  <tr><th>类型</th><th>说明</th></tr>
+  <tr><td>定时提醒</td><td>设定时间触发特定任务</td></tr>
+  <tr><td>监控任务</td><td>持续监控某个文件或目录的变化</td></tr>
+  <tr><td>定期执行</td><td>按周期自动执行 Codex 任务</td></tr>
+  <tr><td>线程唤醒</td><td>在指定时间自动唤醒休眠的线程</td></tr>
+</table>
+
+<h3>12.2 创建自动化任务</h3>
+<pre><code># 设置每日代码审查提醒
+每天早上 9 点，检查 git diff，生成代码审查报告
+
+# 监控依赖更新
+每周检查 package.json 中的依赖是否有安全漏洞更新
+
+# 定期测试执行
+每晚自动运行完整测试套件，报告测试结果</code></pre>
+
+<h3>12.3 线程生命周期管理</h3>
+<ul>
+  <li><strong>创建</strong> — 每个新任务自动创建线程</li>
+  <li><strong>休眠</strong> — 长时间无活动的线程自动进入休眠</li>
+  <li><strong>唤醒</strong> — 通过自动化规则或手动操作唤醒</li>
+  <li><strong>归档</strong> — 完成的线程自动归档，保持界面整洁</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 第十三部分 ==================== -->
+<h2 id="part13">第十三部分：调试与故障排查 <span class="badge badge-intermediate">进阶</span></h2>
+
+<h3>13.1 常见问题排查</h3>
+
+<h4>问题一：API 密钥无效</h4>
+<pre><code># 检查配置
+cat ~/.codex/config.json
+
+# 重新设置密钥
+codex config set api-key [你的密钥]
+
+# 验证连接
+codex config test</code></pre>
+
+<h4>问题二：模型加载失败</h4>
+<pre><code># 查看当前模型配置
+codex config get model
+
+# 切换到备用模型
+codex --model gpt-5.4
+
+# 清除模型缓存
+rm -rf ~/.codex/cache/models_cache.json</code></pre>
+
+<h4>问题三：沙箱权限不足</h4>
+<pre><code># 查看当前沙箱状态
+codex sandbox status
+
+# 请求提升权限
+# 在 Codex 提示权限拒绝时，确认授权即可
+
+# 临时绕过（不推荐生产环境）
+codex --sandbox-mode full</code></pre>
+
+<h4>问题四：会话丢失</h4>
+<pre><code># 查看所有历史会话
+codex sessions list --all
+
+# 恢复特定会话
+codex sessions restore --id session-uuid-here
+
+# 导出会话历史
+codex sessions export --format json</code></pre>
+
+<h3>13.2 日志查看</h3>
+<pre><code># 查看 Codex 运行日志
+# Windows
+Get-Content "C:\Users\leoch\AppData\Roaming\codex\logs\codex.log" -Tail 100
+
+# macOS / Linux
+tail -100 ~/.codex/logs/codex.log
+
+# 开启调试模式
+codex --debug</code></pre>
+
+<h3>13.3 性能优化</h3>
+<table>
+  <tr><th>优化项</th><th>方法</th><th>效果</th></tr>
+  <tr><td>减少 token 消耗</td><td>精简 prompt，避免一次性发送大量代码</td><td>降低成本</td></tr>
+  <tr><td>加快响应速度</td><td>使用 <code>gpt-5.4-mini</code> 处理简单任务</td><td>速度提升 2-3x</td></tr>
+  <tr><td>大文件处理</td><td>先让 Codex 分析文件结构，再针对性修改</td><td>避免超时</td></tr>
+  <tr><td>缓存利用</td><td>启用模型缓存，减少重复请求</td><td>加速常用操作</td></tr>
+</table>
+
+<hr>
+
+<!-- ==================== 第十四部分 ==================== -->
+<h2 id="part14">第十四部分：安全与最佳实践 <span class="badge badge-intermediate">进阶</span></h2>
+
+<h3>14.1 密钥安全管理</h3>
+<div class="warning note">
+  <strong>🔒 安全警告：</strong>永远不要将 API 密钥提交到版本控制系统！
+</div>
+<pre><code># 确保密钥不在 Git 历史中
+# 添加到 .gitignore
+echo ".codex/config.json" >> .gitignore
+
+# 使用环境变量存储密钥（推荐）
+# Windows PowerShell
+[System.Environment]::SetEnvironmentVariable(
+  "OPENAI_API_KEY", "[你的密钥]", "User"
+)
+
+# Linux / macOS
+echo 'export OPENAI_API_KEY="[你的密钥]"' >> ~/.bashrc</code></pre>
+
+<h3>14.2 文件操作安全</h3>
+<ul>
+  <li><strong>始终确认变更</strong> — Codex 修改文件前，养成先 <code>git diff</code> 查看变更的习惯</li>
+  <li><strong>频繁提交</strong> — 每完成一个功能就 <code>git commit</code>，方便回滚</li>
+  <li><strong>备份关键文件</strong> — 重大修改前先备份</li>
+  <li><strong>工作区隔离</strong> — 不要在系统关键目录运行 Codex</li>
+</ul>
+
+<h3>14.3 最佳实践清单</h3>
+<ol>
+  <li><strong>小步快跑</strong> — 将大任务拆成小步骤，逐步验证</li>
+  <li><strong>明确上下文</strong> — 提供相关文件路径和代码片段</li>
+  <li><strong>增量验证</strong> — 每完成一步就运行测试确认</li>
+  <li><strong>代码审查</strong> — Codex 生成的代码也要认真审查</li>
+  <li><strong>文档同步</strong> — 代码变更后记得更新文档</li>
+  <li><strong>版本控制</strong> — 每次较大改动前提交 Git</li>
+</ol>
+
+<hr>
+
+<!-- ==================== 第十五部分 ==================== -->
+<h2 id="part15">第十五部分：常见问题 FAQ <span class="badge badge-beginner">入门</span></h2>
+
+<h3>Q1：Codex 和 GitHub Copilot 有什么区别？</h3>
+<p>Copilot 是<strong>代码补全工具</strong>，主要在编辑器内提供单行/单函数的代码建议。Codex 是<strong>完整的编程智能体</strong>，可以在整个项目层面工作：读文件、运行命令、执行测试、管理 Git。Copilot 像是"键盘助手"，Codex 更像是"结对程序员"。</p>
+
+<h3>Q2：Codex 会泄露我的代码吗？</h3>
+<p>OpenAI 承诺不会使用 Codex 的交互数据来训练模型。但出于安全考虑，建议不要在 prompt 中发送敏感信息（密码、密钥、个人数据）。</p>
+
+<h3>Q3：Codex 支持哪些编程语言？</h3>
+<p>Codex 支持几乎所有主流编程语言，包括但不限于：JavaScript/TypeScript、Python、Go、Rust、Java、C/C++、Ruby、PHP、Swift、Kotlin 等。它的代码质量取决于你提供的上下文清晰度。</p>
+
+<h3>Q4：如何处理 Codex 生成的错误代码？</h3>
+<pre><code># 1. 将错误信息直接发给 Codex
+这个代码运行时报错：[粘贴错误]
+请修复。
+
+# 2. 让它运行测试看结果
+请运行 <code>npm test</code>，分析失败的测试并修复。
+
+# 3. 提供更多信息
+在 <code>src/auth.js:42</code> 行附近有问题，
+错误是 TypeError: xxx is not a function。</code></pre>
+
+<h3>Q5：Codex 的 token 消耗怎么计算？</h3>
+<p>Token 消耗取决于：</p>
+<ul>
+  <li>输入上下文的文件大小和数量</li>
+  <li>Codex 执行的命令数量和复杂度</li>
+  <li>代码生成的长度</li>
+  <li>多代理并行时的额外开销</li>
+</ul>
+<p>建议在 <code>config.json</code> 中设置 token 预算以避免意外高额费用。</p>
+
+<h3>Q6：Codex 能帮我做代码审查吗？</h3>
+<p>完全可以！使用方法：</p>
+<pre><code>请审查以下变更：
+1. 安全性：是否有 SQL 注入、XSS 等漏洞？
+2. 性能：有没有明显的性能问题？
+3. 可读性：代码是否符合项目规范？
+4. 测试：是否有对应的单元测试？
+
+重点关注 <code>src/payment/</code> 目录的改动。</code></pre>
+
+<h3>Q7：Codex 可以集成到我的 CI/CD 流程吗？</h3>
+<p>可以。Codex CLI 支持非交互模式，可以在 CI 管道中使用：</p>
+<pre><code># 在 GitHub Actions 中
+- name: Auto code review
+  run: |
+    codex -p "审查 src/ 目录的代码质量，输出 Markdown 报告" \
+         --output review-report.md
+
+- name: Auto test generation
+  run: |
+    codex -p "为 src/utils/ 下的所有函数生成 Jest 测试" \
+         --output tests/</code></pre>
+
+<h3>Q8：如何提升 Codex 的回答质量？</h3>
+<ol>
+  <li><strong>提供上下文</strong> — 发送相关代码片段或文件路径</li>
+  <li><strong>明确期望</strong> — 说清楚你想要什么，而不是"随便写写"</li>
+  <li><strong>迭代 refinement</strong> — 不满意就继续描述，Codex 会逐步改进</li>
+  <li><strong>使用 AGENTS.md</strong> — 固化项目规范和偏好，让 Codex 每次都记住</li>
+  <li><strong>指定模型</strong> — 复杂任务用 <code>gpt-5.5</code>，简单任务用 <code>gpt-5.4-mini</code></li>
+</ol>
+
+<hr>
+
+<!-- ==================== 附录 ==================== -->
+
+<!-- ==================== 第十六部分 ==================== -->
+<h2 id="part16">第十六部分：10个手把手实战案例 <span class="badge badge-beginner">实战</span></h2>
+
+<p>这一章带你从零开始，用 Codex 完成10个真实场景中的高频任务。每个案例都给出了<strong>可直接复制的 Prompt</strong>，照着做就能出成果。</p>
+
+<hr>
+
+<h3>案例一：视频创作 — 自动生成短视频脚本与分镜</h3>
+
+<h4>场景描述</h4>
+<p>你需要为一个产品发布制作一支60秒的短视频，但还没有脚本和分镜方案。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 撰写脚本</strong></div>
+</div>
+<p>在 Codex 中输入以下 Prompt：</p>
+
+<pre><code>请为我创作一支60秒的产品宣传短视频脚本。
+
+产品信息：
+- 产品名称：SmartDesk 智能升降桌
+- 核心卖点：电动升降、记忆高度、USB充电、防碰撞
+- 目标受众：25-40岁上班族
+- 风格：科技感、节奏明快
+
+请按以下格式输出：
+1. 总时长60秒，分为5个镜头
+2. 每个镜头标注：画面描述、旁白文案、字幕、背景音乐情绪、时长
+3. 最后附上完整的拍摄清单（道具、场地、演员）</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 生成分镜图提示词</strong></div>
+</div>
+<p>脚本确认后，继续输入：</p>
+
+<pre><code>根据上面的脚本，为每个镜头生成一段图像生成提示词（英文），
+用于 Midjourney 或 DALL-E 生成对应分镜草图。
+每个提示词需要包含：画面构图、色彩风格、光影效果。</code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 生成配音文本</strong></div>
+
+<pre><code>请把旁白文案整理成一个可直接用于 AI 配音工具的文本文件，
+标注停顿位置和语气要求，保存到 <code>script/voiceover.txt</code></code></pre>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>一份完整的短视频脚本 + 分镜提示词 + 配音文本，可直接交给剪辑师或使用 AI 视频工具生成成片。
+</div>
+
+<hr>
+
+<h3>案例二：图像创作 — 批量生成社交媒体配图</h3>
+
+<h4>场景描述</h4>
+<p>运营需要一个月的 Instagram 配图（30张），主题围绕"健康生活方式"。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 规划内容日历</strong></div>
+</div>
+
+<pre><code>请帮我规划30天的社交媒体内容日历，主题是"健康生活方式"。
+
+要求：
+- 每天一个独特主题（饮食、运动、睡眠、冥想等）
+- 每个主题配一句吸引人的文案（中英双语）
+- 标注适合的图片风格（摄影/插画/信息图）
+- 输出为 Markdown 表格，包含日期、主题、文案、风格、标签</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 生成图像提示词</strong></div>
+
+<pre><code>根据上面的内容日历，为每一天生成一段图像生成提示词（英文）。
+
+格式要求：
+- 每段提示词不超过200字
+- 包含主体描述、背景、色彩方案、艺术风格
+- 统一风格：现代简约插画风，柔和色调
+- 输出为 <code>prompts.txt</code> 文件，每天一行，格式：Day1: [提示词]</code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>批量生成图像</strong></div>
+  <p>如果你有 Codex 的图像生成 Skill（<code>imagegen</code>），可以让 Codex 自动调用：</p>
+
+<pre><code>请使用图像生成功能，按照 prompts.txt 中的提示词，
+逐张生成30张图片，保存到 <code>images/</code> 目录，
+文件名格式：day01.png, day02.png ... day30.png</code></pre>
+
+<div class="note">
+  <strong>💡 提示：</strong>如果 Codex 没有图像生成 Skill，可以将 <code>prompts.txt</code> 中的提示词复制到 Midjourney、DALL-E 或 Stable Diffusion 中批量生成。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>30天完整的社交媒体配图方案 + 可直接使用的图像提示词文件。
+</div>
+
+<hr>
+
+<h3>案例三：数据收集 — 自动爬取竞品价格信息</h3>
+
+<h4>场景描述</h4>
+<p>你需要收集电商平台上同类产品的价格，用于市场定价分析。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 编写爬虫脚本</strong></div>
+</div>
+
+<pre><code>请帮我写一个 Python 爬虫脚本，完成以下任务：
+
+目标：采集某电商平台搜索"无线蓝牙耳机"的前3页商品数据
+
+需要采集的字段：
+1. 商品名称
+2. 价格（人民币）
+3. 品牌
+4. 评分
+5. 评论数
+6. 店铺名称
+
+技术要求：
+- 使用 Python + requests + BeautifulSoup
+- 添加随机延迟（2-5秒）避免被封
+- 处理反爬机制（User-Agent 轮换）
+- 结果保存为 CSV 文件
+- 添加错误重试机制（最多3次）
+
+输出文件：<code>data/earbuds_price.csv</code></code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 运行并验证数据</strong></div>
+
+<pre><code>运行刚才写的爬虫脚本，检查输出结果。
+如果采集到的数据少于50条，请优化脚本增加采集量。</code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 生成数据摘要</strong></div>
+
+<pre><code>请分析 <code>data/earbuds_price.csv</code> 中的数据，输出：
+1. 价格分布统计（最低/最高/平均/中位数）
+2. 各品牌价格区间对比
+3. 性价比最高的前5款产品
+4. 输出为一份 Markdown 报告，保存到 <code>reports/price_analysis.md</code></code></pre>
+
+<div class="note warning">
+  <strong>⚠️ 注意：</strong>爬取网站前请确认其 <code>robots.txt</code> 和使用条款，尊重网站的爬虫政策。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>完整的竞品价格数据集 + 数据分析报告。
+</div>
+
+<hr>
+
+<h3>案例四：数据分析 — 从原始数据到可视化报告</h3>
+
+<h4>场景描述</h4>
+<p>你有一份销售数据 Excel 文件，需要分析趋势并生成可视化报告。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 探索数据</strong></div>
+</div>
+
+<pre><code>我有一个销售数据文件 <code>data/sales_2025.xlsx</code>，
+请先帮我了解数据结构：
+1. 有多少行多少列？
+2. 每个字段的含义和数据类型是什么？
+3. 有哪些缺失值或异常值？
+4. 数据的时间范围是什么？
+
+输出为一份数据概览报告。</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 进行分析</strong></div>
+
+<pre><code>基于上面的数据，请完成以下分析：
+
+1. 月度销售趋势分析（折线图数据）
+2. 各产品类别的销售占比（饼图数据）
+3. 各地区销售排名（柱状图数据）
+4. 找出销售额最高的Top10单品
+5. 计算同比/环比增长率
+
+请用 Python + pandas + matplotlib 实现，
+代码保存到 <code>analysis/sales_analysis.py</code>，
+图表保存到 <code>reports/charts/</code> 目录。</code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 生成分析报告</strong></div>
+
+<pre><code>请根据分析结果，撰写一份完整的销售分析报告，
+保存到 <code>reports/sales_report_2025.md</code>。
+
+报告结构：
+1. 执行摘要（3句话概括核心发现）
+2. 关键指标概览（表格形式）
+3. 趋势分析（结合图表说明）
+4. 问题诊断（低销售区域/滞销产品）
+5. 改进建议（至少5条可执行建议）
+6. 附录（详细数据表）</code></pre>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>Python 分析脚本 + 可视化图表 + 完整的 Markdown 分析报告。
+</div>
+
+<hr>
+
+<h3>案例五：公众号写作 — 从零到一篇高质量推文</h3>
+
+<h4>场景描述</h4>
+<p>你需要写一篇关于"AI 改变职场"的公众号文章，要求8000字左右，风格轻松幽默。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 生成大纲</strong></div>
+</div>
+
+<pre><code>请为公众号文章生成一个详细大纲。
+
+主题：AI 正在如何改变我们的职场
+目标读者：25-35岁职场人
+风格：轻松幽默、有故事感、金句频出
+字数：8000字左右
+平台：微信公众号
+
+大纲要求：
+1. 开头用一个真实职场故事引入（300字）
+2. 分5个章节，每章一个小标题
+3. 每章包含：案例故事 + 数据支撑 + 个人观点
+4. 结尾给出3条实用建议 + 互动话题
+5. 标注每章预估字数</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 逐章撰写</strong></div>
+
+<pre><code>根据大纲，现在开始撰写正文。
+
+要求：
+1. 语言口语化，像朋友聊天一样
+2. 每章开头用一个故事或场景引入
+3. 引用数据时注明来源
+4. 适当使用 emoji 增加可读性（每节不超过3个）
+5. 每隔一段加粗一个金句
+6. 段落控制在3-4行以内，适合手机阅读
+
+请直接输出完整文章，保存到 <code>articles/ai_workplace.md</code></code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 生成排版和传播素材</strong></div>
+
+<pre><code>请为这篇文章生成以下内容：
+
+1. 5个备选标题（含emoji），适合公众号封面
+2. 一段80字的摘要，用于分享卡片
+3. 3个互动话题，放在文末引导评论
+4. 10个相关话题标签（hashtag）
+5. 封面图的设计描述（用于让设计师或AI绘图生成）
+
+保存到 <code>articles/ai_workplace_assets.md</code></code></pre>
+
+<div class="note tip">
+  <strong>💡 公众号排版技巧：</strong>将 Markdown 文件复制到 <strong>135编辑器</strong> 或 <strong>秀米</strong> 中，可以一键转换为微信公众号的富文本排版。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>一篇完整的公众号文章 + 标题/摘要/标签/封面图描述等全套传播素材。
+</div>
+
+<hr>
+
+<h3>案例六：小程序搭建 — 从零构建一个待办事项小程序</h3>
+
+<h4>场景描述</h4>
+<p>你想开发一个微信小程序"我的待办"，支持增删改查、分类标签、提醒功能。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 设计项目结构</strong></div>
+</div>
+
+<pre><code>请帮我搭建一个微信小程序项目，功能："我的待办"
+
+技术要求：
+- 使用原生小程序框架（WXML + WXSS + JS）
+- 不使用第三方UI库
+- 使用 wx.storage 本地存储数据
+
+功能清单：
+1. 首页：待办列表，支持标记完成/删除
+2. 添加页：输入标题、选择分类、设置提醒时间
+3. 分类管理：新增/编辑/删除分类
+4. 统计页：今日完成数、完成率、连续天数
+
+请先生成完整的项目文件结构，确认后再开始写代码。</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 逐模块编写代码</strong></div>
+
+<pre><code>确认结构后，请按以下顺序生成代码：
+
+第一步：生成 app.json 配置和全局样式
+第二步：生成首页（index）的 WXML/WXSS/JS
+第三步：生成添加页（add）的 WXML/WXSS/JS
+第四步：生成分类页（category）的 WXML/WXSS/JS
+第五步：生成统计页（stats）的 WXML/WXSS/JS
+
+每个页面需要：
+- 完整的页面逻辑
+- 美观的样式（现代简约风格，主色#6c8aff）
+- 添加动画过渡效果
+- 完善的错误处理
+
+代码保存到 <code>miniprogram/</code> 目录下。</code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 生成项目说明</strong></div>
+
+<pre><code>请为这个项目生成一份 README.md，包含：
+1. 项目介绍
+2. 功能清单
+3. 技术栈说明
+4. 目录结构说明
+5. 如何在微信开发者工具中运行
+6. 如何部署上线</code></pre>
+
+<div class="note info">
+  <strong>📌 提示：</strong>将生成的代码复制到微信开发者工具中，导入项目后即可预览和调试。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>一个完整的微信小程序源码 + 项目文档，可直接在微信开发者工具中运行。
+</div>
+
+<hr>
+
+<h3>案例七：模仿网页生成 — 复刻一个落地页</h3>
+
+<h4>场景描述</h4>
+<p>你喜欢某个网站的landing page设计风格，想参考它做一个类似的页面。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 分析目标页面结构</strong></div>
+</div>
+
+<pre><code>我想参考 <code>https://www.example.com</code> 的设计风格，
+做一个类似的落地页。
+
+请先帮我分析这个页面的结构：
+1. 页面包含哪些区块（导航、Hero、功能介绍、 testimonials、CTA、Footer）？
+2. 每个区块的主要元素是什么？
+3. 布局方式是单列还是双列？
+4. 配色方案大致是什么样的？
+
+输出一份页面结构分析报告。</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 生成代码</strong></div>
+
+<pre><code>根据上面的分析，请帮我生成一个类似的落地页。
+
+要求：
+1. 技术栈：HTML + CSS + 少量 JavaScript（不用框架）
+2. 响应式设计，适配手机和电脑
+3. 包含以下区块：
+   - 顶部导航栏（Logo + 3个菜单项）
+   - Hero 区域（大标题 + 副标题 + CTA按钮）
+   - 功能特点（3列卡片布局，每列一个图标+文字）
+   - 用户评价（2-3个testimonial卡片）
+   - 底部CTA区域
+   - Footer（版权信息 + 社交链接）
+4. 配色方案：主色蓝色系，辅助色白色
+5. 字体：使用系统默认字体栈
+6. 添加平滑滚动和淡入动画效果
+
+保存到 <code>landing-page/index.html</code> 和 <code>landing-page/style.css</code></code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>让 Codex 替换为你的内容</strong></div>
+
+<pre><code>请将页面中的占位内容替换为我的实际内容：
+- 公司名称：XXX科技
+- 产品名：智能办公助手
+- 主标语：让团队协作效率提升300%
+- 联系方式：contact@xxx.com
+- 客服电话：400-123-4567</code></pre>
+
+<div class="note warning">
+  <strong>⚠️ 注意：</strong>模仿网页设计可以参考布局和风格，但不要直接复制他人的原创内容、图片或商标。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>一个完整的响应式落地页，包含 HTML/CSS/JS，可直接部署到服务器或 Netlify/Vercel。
+</div>
+
+<hr>
+
+<h3>案例八：PPT 创作 — 自动生成演示文稿</h3>
+
+<h4>场景描述</h4>
+<p>你需要为公司季度汇报准备一份20页左右的PPT，但时间紧迫。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 生成大纲和内容</strong></div>
+</div>
+
+<pre><code>请帮我准备一份公司Q3季度汇报PPT的内容大纲。
+
+汇报人：产品总监
+听众：CEO + 各部门负责人
+时长：30分钟（约20页）
+
+内容框架：
+1. Q3核心数据概览（营收、用户增长、转化率）
+2. 重点项目回顾（3个项目）
+3. 市场分析与竞争格局
+4. 用户反馈与产品迭代
+5. Q4规划与目标
+6. 资源需求
+
+请为每一页输出：
+- 页面标题
+- 要点列表（3-5条）
+- 建议的图表类型（柱状图/折线图/饼图等）
+- 演讲备注（每页约30字）
+
+保存到 <code>presentations/q3_review_outline.md</code></code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 生成 Python 脚本创建 PPT</strong></div>
+
+<pre><code>请帮我写一个 Python 脚本，使用 python-pptx 库，
+将上面的PPT内容自动生成一个 .pptx 文件。
+
+要求：
+1. 每页使用不同的版式（标题页、两列内容、全图页等）
+2. 配色方案：深蓝(#1a237e) + 金色(#ffd600) + 白色
+3. 字体：微软雅黑（中文）+ Arial（英文/数字）
+4. 添加公司Logo占位符
+5. 数据页使用图表（用示例数据）
+6. 最后一页为"谢谢" + 联系方式
+
+保存到 <code>presentations/generate_ppt.py</code>，
+输出文件：<code>presentations/Q3汇报.pptx</code></code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>运行脚本并美化</strong></div>
+
+<pre><code>运行 generate_ppt.py 生成PPT文件。
+然后帮我优化：
+1. 调整各页间距和对齐
+2. 统一字体大小层级
+3. 添加页面切换动画建议
+4. 导出为PDF版本作为备份</code></pre>
+
+<div class="note tip">
+  <strong>💡 安装依赖：</strong>运行前需要先执行 <code>pip install python-pptx</code>。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>一份格式精美的 .pptx 演示文稿 + PDF 备份，可直接用于汇报。
+</div>
+
+<hr>
+
+<h3>案例九：表单填写 — 批量生成并提交表单数据</h3>
+
+<h4>场景描述</h4>
+<p>你需要为一个活动填写50份参会者报名表，包含姓名、邮箱、公司、职位等信息。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 生成模拟数据</strong></div>
+</div>
+
+<pre><code>请帮我生成50条模拟的参会者报名数据。
+
+字段要求：
+1. 姓名（中文，50个不同的名字）
+2. 邮箱（格式：姓名拼音@company.com）
+3. 公司名称（真实的科技公司名字）
+4. 职位（CTO/产品经理/设计师/工程师等）
+5. 参会意向（技术分享/资源对接/投资合作）
+6. 紧急程度（高/中/低）
+
+输出格式：
+1. 先输出为 CSV 文件 <code>data/registrations.csv</code>
+2. 再输出为 JSON 数组，方便程序调用</code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 编写自动化填写脚本</strong></div>
+
+<pre><code>我有一个在线报名表单，URL 是 <code>https://forms.example.com/register</code>。
+
+请帮我写一个 Python 脚本，使用 Playwright 自动化填写并提交表单。
+
+要求：
+1. 从 <code>data/registrations.csv</code> 逐行读取数据
+2. 自动填充每个字段的表单
+3. 点击提交按钮
+4. 等待表单响应，确认提交成功
+5. 记录每笔提交的結果（成功/失败）
+6. 遇到失败时跳过并记录原因，继续下一笔
+7. 添加随机延迟（3-8秒）避免被识别为机器人
+8. 最终生成一份提交报告 <code>data/submit_report.md</code></code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>运行并监控</strong></div>
+
+<pre><code>运行表单填写脚本，监控执行过程。
+如果中途遇到验证码或其他阻碍，请：
+1. 暂停脚本
+2. 生成一份需要手动处理的列表
+3. 输出为 <code>data/manual_tasks.md</code></code></pre>
+
+<div class="note warning">
+  <strong>⚠️ 注意：</strong>批量提交表单前，请确认目标网站的服务条款是否允许自动化操作。滥用可能违反法律。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>50条结构化报名数据 + 自动化填写脚本 + 提交结果报告。
+</div>
+
+<hr>
+
+<h3>案例十：文件整理 — 智能分类与归档</h3>
+
+<h4>场景描述</h4>
+<p>你的电脑里有一堆杂乱的文件，需要按类型、日期、项目自动分类整理。</p>
+
+<h4>操作步骤</h4>
+<div class="step">
+  <div class="step-num">1</div>
+  <div><strong>让 Codex 分析文件现状</strong></div>
+</div>
+
+<pre><code>请帮我分析 <code>C:\Downloads\</code> 目录下的文件情况：
+
+1. 总共有多少个文件？
+2. 按文件类型分类统计（图片/PDF/文档/视频/压缩包等）
+3. 按文件大小分布（小于1MB / 1-10MB / 10-100MB / 大于100MB）
+4. 按修改日期统计（最近7天/30天/90天/半年以上）
+5. 找出重复文件（按文件名或MD5哈希）
+
+输出一份文件分析报告 <code>reports/file_audit.md</code></code></pre>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <div><strong>让 Codex 编写整理脚本</strong></div>
+
+<pre><code>根据上面的分析，请帮我写一个 Python 整理脚本。
+
+要求：
+1. 扫描 <code>C:\Downloads\</code> 下的所有文件
+2. 按文件扩展名自动分类到以下文件夹：
+   - 图片：.jpg .png .gif .svg .webp → images/
+   - 文档：.pdf .doc .docx .txt → documents/
+   - 表格：.xls .xlsx .csv → spreadsheets/
+   - 视频：.mp4 .avi .mov .mkv → videos/
+   - 音频：.mp3 .wav .flac → audio/
+   - 压缩包：.zip .rar .7z .tar.gz → archives/
+   - 代码：.py .js .ts .java .go → code/
+   - 其他：未匹配的文件 → misc/
+3. 在每个分类文件夹下，再按年份和月份建立子文件夹
+4. 跳过大于500MB的大文件，单独列出清单
+5. 跳过已经存在于目标目录的文件（避免覆盖）
+6. 输出整理报告 <code>reports/file_organize_log.md</code>
+
+保存到 <code>tools/organize_files.py</code></code></pre>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <div><strong>预览并执行</strong></div>
+
+<pre><code>请先运行脚本的"预览模式"（只列出将要移动的文件，不实际移动）。
+确认结果无误后，开启"执行模式"进行实际整理。
+
+预览模式下，输出格式：
+[即将移动] 原路径 → 目标路径
+[跳过] 原因（过大/已存在/其他）</code></pre>
+
+<div class="note tip">
+  <strong>💡 建议：</strong>整理前建议先将 <code>Downloads</code> 文件夹整体复制一份到别处作为备份，以防误操作。
+</div>
+
+<div class="note success">
+  <strong>✅ 产出物：</strong>文件分析报告 + 智能整理脚本 + 整理日志，杂乱的文件夹瞬间变得井井有条。
+</div>
+
+<hr>
+
+<h3>案例汇总速查表</h3>
+<table>
+  <tr><th>案例</th><th>领域</th><th>核心技能</th><th>预计耗时</th></tr>
+  <tr><td>视频创作</td><td>🎬 内容创作</td><td>脚本撰写、分镜设计</td><td>15-30分钟</td></tr>
+  <tr><td>图像创作</td><td>🎨 视觉设计</td><td>内容规划、批量生成</td><td>30-60分钟</td></tr>
+  <tr><td>数据收集</td><td>🕷️ 数据采集</td><td>爬虫编写、数据清洗</td><td>20-40分钟</td></tr>
+  <tr><td>数据分析</td><td>📊 商业分析</td><td>统计分析、可视化</td><td>30-60分钟</td></tr>
+  <tr><td>公众号写作</td><td>✍️ 文字创作</td><td>大纲设计、内容撰写</td><td>20-40分钟</td></tr>
+  <tr><td>小程序搭建</td><td>💻 软件开发</td><td>架构设计、全栈编码</td><td>60-120分钟</td></tr>
+  <tr><td>模仿网页生成</td><td>🌐 Web开发</td><td>页面分析、前端实现</td><td>30-60分钟</td></tr>
+  <tr><td>PPT创作</td><td>📑 演示文稿</td><td>内容组织、自动化生成</td><td>20-40分钟</td></tr>
+  <tr><td>表单填写</td><td>🤖 自动化</td><td>数据生成、RPA脚本</td><td>30-60分钟</td></tr>
+  <tr><td>文件整理</td><td>📁 效率工具</td><td>文件分析、智能分类</td><td>15-30分钟</td></tr>
+</table>
+
+<p style="margin-top: 1.5rem;"><strong>🚀 下一步：</strong>从上面的案例中选择一个你最感兴趣的，直接复制 Prompt 开始实操吧！遇到任何问题都可以随时回来查阅前面的章节。</p><h2>附录：快捷命令速查表</h2>
+
+<h3>日常高频命令</h3>
+<pre><code># 启动 Codex
+codex
+
+# 单次命令
+codex -p "你的需求"
+
+# 指定模型
+codex --model gpt-5.5
+
+# 设置 token 预算
+codex --token-budget 50000
+
+# 查看配置
+codex config
+
+# 查看会话
+codex sessions list
+
+# 设置代理（如需翻墙）
+# 通过环境变量设置代理（按需）</code></pre>
+
+<h3>快捷键（桌面应用）</h3>
+<table>
+  <tr><th>快捷键</th><th>功能</th></tr>
+  <tr><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>新建线程</td></tr>
+  <tr><td><kbd>Ctrl</kbd> + <kbd>L</kbd></td><td>清空当前对话</td></tr>
+  <tr><td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></td><td>命令面板</td></tr>
+  <tr><td><kbd>Esc</kbd></td><td>中断当前操作</td></tr>
+  <tr><td><kbd>Ctrl</kbd> + <kbd>D</kbd></td><td>复制最后一条回复</td></tr>
+</table>
+
+<hr>
+
+<p style="text-align: center; color: var(--text2); margin-top: 3rem; font-size: 0.9rem;">
+  📖 Codex 实用手册 v1.0 · 更新于 2026-07-04<br>
+  基于 Codex 实际工作机制编写，涵盖 CLI、桌面应用、Skills、Plugins、MCP 等全部核心功能。
+</p>
+
+</div>
+</body>
+</html>
